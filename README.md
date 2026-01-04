@@ -1,6 +1,15 @@
 # MOQX
 
-**TODO: Add description**
+MOQT (Media over QUIC Transport) protocol primitives for Elixir.
+
+This library provides:
+- Draft-14 data structures for control and data planes.
+- `MOQX.Marshaler` protocol to serialize MOQT messages to iodata.
+- `MOQX.Unmarshaler` state machine to decode control streams, data streams, and datagrams with partial input handling.
+- QUIC varint encoder/decoder (`MOQX.Varint`).
+
+The library is transport-agnostic: it produces/consumes binaries that can be
+carried over QUIC streams or datagrams (e.g. via quichex).
 
 ## Installation
 
@@ -15,7 +24,4 @@ def deps do
 end
 ```
 
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at <https://hexdocs.pm/moqx>.
-
+Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc).

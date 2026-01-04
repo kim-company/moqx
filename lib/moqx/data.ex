@@ -115,12 +115,14 @@ defmodule MOQX.Data do
           | FetchObject.t()
 
   @doc false
+  @spec object_status_value(ObjectStatus.t()) :: non_neg_integer()
   def object_status_value(:normal), do: 0x0
   def object_status_value(:does_not_exist), do: 0x1
   def object_status_value(:end_of_group), do: 0x3
   def object_status_value(:end_of_track), do: 0x4
 
   @doc false
+  @spec subgroup_header_requires_explicit_id?(SubgroupHeader.header_type()) :: boolean()
   def subgroup_header_requires_explicit_id?(type) when type in [0x14, 0x15, 0x1C, 0x1D], do: true
   def subgroup_header_requires_explicit_id?(_type), do: false
 end

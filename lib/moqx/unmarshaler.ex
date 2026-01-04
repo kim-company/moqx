@@ -29,11 +29,13 @@ defmodule MOQX.Unmarshaler do
         }
 
   @spec init(mode()) :: t()
+  @doc "Initialize a decoder for a single control/data stream or datagram flow."
   def init(mode) when mode in [:control, :datagram, :subgroup, :fetch] do
     %__MODULE__{mode: mode}
   end
 
   @spec feed(t(), binary()) :: {:ok, [event()], t()} | {:need_more_data, t()} | {:error, any(), t()}
+  @doc "Feed a chunk of bytes and emit any decoded events."
   def feed(%__MODULE__{} = state, bytes) when is_binary(bytes) do
     buffer = state.buffer <> bytes
 

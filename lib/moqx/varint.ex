@@ -7,6 +7,7 @@ defmodule MOQX.Varint do
 
   @max_value (1 <<< 62) - 1
 
+  @doc "Encode a non-negative integer using QUIC varint encoding."
   @spec encode(non_neg_integer()) :: binary()
   def encode(value) when is_integer(value) and value >= 0 and value <= @max_value do
     cond do
@@ -28,6 +29,7 @@ defmodule MOQX.Varint do
     raise ArgumentError, "varint overflow: #{value}"
   end
 
+  @doc "Decode a QUIC varint from the front of a binary."
   @spec decode(binary()) :: {:ok, non_neg_integer(), binary()} | :need_more_data | {:error, :invalid_varint}
   def decode(<<>>), do: :need_more_data
 

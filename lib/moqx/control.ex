@@ -473,6 +473,7 @@ defmodule MOQX.Control do
           | PublishDone.t()
 
   @doc false
+  @spec encode_control_frame(non_neg_integer(), iodata()) :: iodata()
   def encode_control_frame(type, payload) do
     payload_bin = IO.iodata_to_binary(payload)
     length = byte_size(payload_bin)
@@ -485,37 +486,44 @@ defmodule MOQX.Control do
   end
 
   @doc false
+  @spec group_order_value(group_order()) :: 0x0 | 0x1 | 0x2
   def group_order_value(:original), do: 0x0
   def group_order_value(:ascending), do: 0x1
   def group_order_value(:descending), do: 0x2
 
   @doc false
+  @spec filter_type_value(filter_type()) :: 0x1 | 0x2 | 0x3 | 0x4
   def filter_type_value(:next_group_start), do: 0x1
   def filter_type_value(:latest_object), do: 0x2
   def filter_type_value(:absolute_start), do: 0x3
   def filter_type_value(:absolute_range), do: 0x4
 
   @doc false
+  @spec fetch_type_value(fetch_type()) :: 0x1 | 0x2 | 0x3
   def fetch_type_value(:standalone), do: 0x1
   def fetch_type_value(:relative_fetch), do: 0x2
   def fetch_type_value(:absolute_fetch), do: 0x3
 
   @doc false
+  @spec encode_bool(boolean()) :: 0 | 1
   def encode_bool(true), do: 1
   def encode_bool(false), do: 0
 
   @doc false
+  @spec encode_reason(binary()) :: iodata()
   def encode_reason(reason) when is_binary(reason) do
     [MOQX.Varint.encode(byte_size(reason)), reason]
   end
 
   @doc false
+  @spec encode_params([KeyValuePair.t()] | nil) :: iodata()
   def encode_params(nil), do: MOQX.Varint.encode(0)
   def encode_params(params) when is_list(params) do
     [MOQX.Varint.encode(length(params)), Enum.map(params, &MOQX.Marshaler.marshal/1)]
   end
 
   @doc false
+  @spec encode_location_or_default(Location.t() | nil) :: iodata()
   def encode_location_or_default(nil), do: MOQX.Marshaler.marshal(%Location{group: 0, object: 0})
   def encode_location_or_default(location), do: MOQX.Marshaler.marshal(location)
 end
