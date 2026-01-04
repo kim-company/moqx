@@ -4,9 +4,14 @@ defmodule MOQX.MixProject do
   def project do
     [
       app: :moqx,
+      description: description(),
       version: "0.1.0",
       elixir: "~> 1.19",
       start_permanent: Mix.env() == :prod,
+      source_url: "https://github.com/kim_company/moqx",
+      homepage_url: "https://github.com/kim_company/moqx",
+      docs: docs(),
+      package: package(),
       deps: deps()
     ]
   end
@@ -21,7 +26,28 @@ defmodule MOQX.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:quichex, "~> 0.1.0"}
+      {:quichex, "~> 0.1.0"},
+      {:ex_doc, "~> 0.30", only: :dev, runtime: false}
+    ]
+  end
+
+  defp description do
+    "MOQT (Media over QUIC Transport) protocol primitives for Elixir."
+  end
+
+  defp package do
+    [
+      licenses: ["Apache-2.0"],
+      maintainers: ["KIM Keep In Mind GmbH"],
+      links: %{"GitHub" => "https://github.com/kim_company/moqx"},
+      files: ["lib", "mix.exs", "README.md", "LICENSE"]
+    ]
+  end
+
+  defp docs do
+    [
+      main: "readme",
+      extras: ["README.md"]
     ]
   end
 end
