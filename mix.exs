@@ -26,7 +26,6 @@ defmodule MOQX.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:quichex, "~> 0.1.0"},
       {:ex_doc, "~> 0.30", only: :dev, runtime: false}
     ]
   end
