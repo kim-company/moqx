@@ -5,7 +5,7 @@ defmodule MOQX.MixProject do
     [
       app: :moqx,
       description: description(),
-      version: "0.1.0",
+      version: "0.1.1",
       elixir: "~> 1.19",
       start_permanent: Mix.env() == :prod,
       source_url: "https://github.com/kim_company/moqx",
